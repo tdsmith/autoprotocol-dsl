@@ -1,3 +1,5 @@
+require 'AutoprotocolDsl/container'
+
 module Autoprotocol
   class Protocol
     extend AttrExtras.mixin
@@ -15,8 +17,12 @@ module Autoprotocol
       @steps = []
     end
 
-    def ref(name)
-      @refs << name
+    def ref(container=nil, &block)
+      if block_given?
+        raise ArgumentError.new("Must not provide both a container and a block") if container
+        container = Docile.dsl_eval(ContainerBuilder.new, &block).build
+      end
+      @refs << container if container
       self
     end
 
