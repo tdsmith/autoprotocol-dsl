@@ -1,8 +1,13 @@
 require 'AutoprotocolDsl'
 
+container = Autoprotocol.container do
+  name "Foo"
+  id "Bar"
+  discard
+end
+
 my_protocol = Autoprotocol.protocol do
-  ref do
-    name "Hello world"
+  ref "Hello world" do
     id 12345
     store :cold_20
   end
@@ -12,6 +17,8 @@ my_protocol = Autoprotocol.protocol do
     id "opaque_string"
     discard
   end
+
+  ref container
 
   step "step one"
   step "step two"
