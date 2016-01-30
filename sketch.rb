@@ -8,7 +8,7 @@ end
 
 my_protocol = AutoprotocolDsl.protocol do
   ref "Hello world" do
-    id 12345
+    container_type :pcr_96
     store :cold_20
   end
 
