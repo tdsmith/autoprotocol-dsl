@@ -2,7 +2,7 @@ module AutoprotocolDsl
   class Container
     extend AttrExtras.mixin
     attr_initialize :name, :id, :store, :discard
-    attr_private :name, :id, :store, :discard
+    attr_reader :name, :id, :store, :discard
 
     def to_h
       blob = {id: id}
