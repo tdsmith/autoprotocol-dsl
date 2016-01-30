@@ -16,7 +16,7 @@ module AutoprotocolDsl
       {name => blob}
     end
 
-    def to_json(state)
+    def to_json(state=nil)
       JSON.pretty_generate(to_h, state)
     end
   end
