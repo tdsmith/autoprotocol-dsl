@@ -9,7 +9,7 @@ my_protocol = Autoprotocol.protocol do
 
   ref do
     name "Goodbye world"
-    id 12346
+    id "opaque_string"
     discard
   end
 
