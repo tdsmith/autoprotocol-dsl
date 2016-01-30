@@ -1,5 +1,6 @@
 module Autoprotocol
   class Protocol
+    extend AttrExtras.mixin
     attr_initialize :refs, :steps
     attr_private :refs, :steps
 
