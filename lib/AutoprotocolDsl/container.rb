@@ -25,7 +25,9 @@ module AutoprotocolDsl
     def initialize
       @name = nil
       @id = nil
+      @container_type = nil
       @store = nil
+      @discard = nil
     end
 
     def name(name)
