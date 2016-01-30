@@ -1,11 +1,11 @@
 module AutoprotocolDsl
   class Container
     extend AttrExtras.mixin
-    attr_initialize :name, :id, :store, :discard
-    attr_reader :name, :id, :store, :discard
+    attr_initialize :name, :id, :container_type, :store, :discard
+    attr_reader :name, :id, :container_type, :store, :discard
 
     def to_h
-      blob = id ? {id: id} : {}
+      blob = id ? {id: id} : {new: container_type}
       blob.update(
         if discard
           {discard: true}
@@ -38,6 +38,11 @@ module AutoprotocolDsl
       self
     end
 
+    def container_type(container_type)
+      @container_type = container_type
+      self
+    end
+
     def store(store)
       @store = store
       self
@@ -50,12 +55,13 @@ module AutoprotocolDsl
 
     def build
       validate!
-      Container.new(@name, @id, @store, @discard)
+      Container.new(@name, @id, @container_type, @store, @discard)
     end
 
     private
     def validate!
       raise "Must specify container name" unless @name
+      raise "Must specify either ID or container type" unless @id || @container_type
       raise "Must specify storage or discard condition" unless @store || @discard
       raise "Must either store or discard, not both" if @store && @discard
     end
