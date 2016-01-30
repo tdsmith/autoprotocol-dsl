@@ -1,6 +1,6 @@
 require 'AutoprotocolDsl/container'
 
-module Autoprotocol
+module AutoprotocolDsl
   class Protocol
     extend AttrExtras.mixin
     attr_initialize :refs, :steps

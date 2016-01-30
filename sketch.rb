@@ -1,12 +1,12 @@
 require 'AutoprotocolDsl'
 
-container = Autoprotocol.container do
+container = AutoprotocolDsl.container do
   name "Foo"
   id "Bar"
   discard
 end
 
-my_protocol = Autoprotocol.protocol do
+my_protocol = AutoprotocolDsl.protocol do
   ref "Hello world" do
     id 12345
     store :cold_20

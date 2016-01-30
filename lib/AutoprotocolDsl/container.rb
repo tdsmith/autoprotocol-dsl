@@ -1,4 +1,4 @@
-module Autoprotocol
+module AutoprotocolDsl
   class Container
     extend AttrExtras.mixin
     attr_initialize :name, :id, :store, :discard
