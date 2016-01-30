@@ -7,13 +7,15 @@ module AutoprotocolDsl
     attr_private :refs, :steps
 
     def to_s
-      JSON.pretty_generate({refs: refs, steps: steps})
+      JSON.pretty_generate({refs: refs.values, steps: steps})
     end
   end
 
   class ProtocolBuilder
+    attr_reader :refs
+
     def initialize
-      @refs = []
+      @refs = {}
       @steps = []
     end
 
@@ -31,7 +33,7 @@ module AutoprotocolDsl
         else
           container_or_name
         end
-      @refs << container if container
+      @refs[container.name] = container if container
       self
     end
 
