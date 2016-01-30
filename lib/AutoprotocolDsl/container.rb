@@ -58,6 +58,7 @@ module Autoprotocol
       raise "Must specify container name" unless @name
       raise "Must specify container ID" unless @id
       raise "Must specify storage or discard condition" unless @store || @discard
+      raise "Must either store or discard, not both" if @store && @discard
     end
   end
 
