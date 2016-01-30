@@ -1,13 +1,15 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    attr_extras (4.4.0)
     docile (1.1.5)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  attr_extras
   docile
 
 BUNDLED WITH
-   1.10.6
+   1.11.2
