@@ -20,20 +20,24 @@ module AutoprotocolDsl
     end
 
     def ref(container_or_name=nil, &block)
+      if block_given? && container_or_name.is_a?(Container)
+        raise ArgumentError.new "Must not provide both a Container and a block"
+      end
+
+      unless block_given? || container_or_name.is_a?(Container)
+        raise ArgumentError.new "Must provide either a Container or a block"
+      end
+
       container = \
         if block_given?
-          if container_or_name.is_a? Container
-            raise ArgumentError.new "Must not provide both a container and a block"
-            Docile.dsl_eval(ContainerBuilder.new, &block).build
-          else
-            builder = Docile.dsl_eval(ContainerBuilder.new, &block)
-            builder.name container_or_name if container_or_name
-            builder.build
-          end
+          builder = Docile.dsl_eval(ContainerBuilder.new, &block)
+          builder.name container_or_name if container_or_name
+          builder.build
         else
           container_or_name
         end
-      @refs[container.name] = container if container
+      raise "Name #{container.name} is not unique" if @refs.include?(container.name)
+      @refs[container.name] = container
       self
     end
 
